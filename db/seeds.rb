@@ -10,7 +10,7 @@
 
 Airport.destroy_all
 
-Airport.create!([{
+airports = Airport.create!([{
   code: "ANC",
   city: "Anchorage",
   state: "AK"
@@ -34,4 +34,43 @@ Airport.create!([{
   code: "FAR",
   city: "Fargo",
   state: "ND"
+}])
+
+Flight.destroy_all
+
+flights = Flight.create!([{
+  departure_id: airports.first.id,
+  arrival_id: airports.second.id,
+  departure_time: "2022-12-24 07:00:00",
+  duration: 500
+},
+{
+  departure_id: airports.second.id,
+  arrival_id: airports.third.id,
+  departure_time: "2022-12-24 07:35:00",
+  duration: 420
+},
+{
+  departure_id: airports.fourth.id,
+  arrival_id: airports.last.id,
+  departure_time: "2022-12-24 10:00:00",
+  duration: 360
+},
+{
+  departure_id: airports.third.id,
+  arrival_id: airports.second.id,
+  departure_time: "2022-12-24 14:00:00",
+  duration: 450
+},
+{
+  departure_id: airports.first.id,
+  arrival_id: airports.last.id,
+  departure_time: "2022-12-24 11:00:00",
+  duration: 730
+},
+{
+  departure_id: airports.second.id,
+  arrival_id: airports.fourth.id,
+  departure_time: "2022-12-24 07:00:00",
+  duration: 385
 }])
