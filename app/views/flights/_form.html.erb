@@ -1,17 +1,18 @@
-<%= form_with(model: flight) do |form| %>
-  <% if flight.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(flight.errors.count, "error") %> prohibited this flight from being saved:</h2>
+<%= form_with url: flights_path, method: :get do |f| %>
 
-      <ul>
-        <% flight.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= f.label "Departure City" %>
+  <%= f.select(:departure_id, Airport.options_for_select, selected: params[:departure_id], prompt: "From", require: true) %>
+
+  <%= f.label "Destination City" %>
+  <%= f.select(:arrival_id, Airport.options_for_select, selected: params[:arrival_id], prompt: "To", require: true) %>
+
+  <%= f.label "Departure Date" %>
+  <%= f.select(:departure_time, Flight.options_for_select, selected: params[:departure_time], prompt: "Date") %>
+
+  <%= f.label "Number of Passengers" %>
+  <%= f.select(:passenger_count, options_for_select([1, 2, 3, 4], params[:passenger_count]), require: true ) %>
 
   <div>
-    <%= form.submit %>
+    <%= f.submit "Find Flights" %>
   </div>
 <% end %>
