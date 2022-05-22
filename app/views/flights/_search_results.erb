@@ -1,0 +1,9 @@
+<%= form_with url: flights_path, method: "get", local: true do |f| %>
+  <% @flight_times.each do |flight| %>
+    <%= show_selected_airport(flight.departure_id) %>
+    <%= show_selected_airport(flight.arrival_id) %>
+    <%= flight.departure_time.strftime('%B %d, %Y') %>
+    <%= flight.departure_time.strftime('%H:%M') %>
+    <%= (flight.departure_time + (flight.duration/60).to_i.hours).strftime('%H:%M') %>
+  <% end %>
+<% end %>

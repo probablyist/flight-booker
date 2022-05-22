@@ -2,5 +2,9 @@
 
 <h1>Flights</h1>
 
-<%= render "form" %>
-
+<div class="search_form">
+  <%= render "form" %>
+</div>
+<% unless @flight_times.empty? %>
+  <%= render "search_results" %>
+<% end %>

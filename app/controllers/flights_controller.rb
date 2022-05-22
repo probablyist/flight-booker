@@ -3,7 +3,7 @@ class FlightsController < ApplicationController
 
   # GET /flights or /flights.json
   def index
-    @airport_options = Airport.all.map { |u| [u.city, u.id] }
+    # @airport_options = Airport.all.map { |u| [u.city, u.id] }
     @flight_times = available_flights
     return if flight_params.empty?
   end
@@ -12,14 +12,16 @@ class FlightsController < ApplicationController
   def flights
     Flight.all.order(:departure_time)
   end
-  #Flight.all.map { |u| [u.departure_time, u.departure_id] }
-
 
   def available_flights
     return [] unless params[:departure_id].present?
 
-    date = params[:departure_time].strftime("%m/%d/%Y")
-    flights.where(departure_id: params[:departure_id], arrival_id: params[:arrival_id], departure_time:  within_selected_date(date))
+    date = params[:departure_time].to_datetime
+    flights.where(
+      departure_id: params[:departure_id],
+      arrival_id: params[:arrival_id],
+      departure_time:  within_selected_date(date)
+    )
   end
 
   def within_selected_date(date)
@@ -28,9 +30,7 @@ class FlightsController < ApplicationController
     DateTime.new(date.year, date.month, date.day).all_day
   end
 
-  # def departure_time_formated
-  #   departure_time.strftime("%m/%d/%Y")
-  # end
+
 
 
   private
