@@ -1,4 +1,7 @@
 class Flight < ApplicationRecord
+  has_many :bookings, dependent: :destroy
+  has_many :passengers, through: :bookings
+
   belongs_to :origin_airport, class_name: "Airport",
     foreign_key: "departure_id",
     inverse_of: :departing_flights
