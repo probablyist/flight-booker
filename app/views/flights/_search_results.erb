@@ -7,9 +7,11 @@
         <td>Departure Date</td>
         <td>Departure Time</td>
         <td>Flight Duration</td>
+        <td>Select Flight</td>
       </tr>
     </thead>
-    <%= form_with url: flights_path, method: "get", local: true do |f| %>
+    <%= form_with url: new_booking_path, method: "get", local: true do |f| %>
+      <%= hidden_field_tag :passenger_count, params[:passenger_count] %>
       <% @flight_times.each do |flight| %>
         <tr class="search_results">
           <td><%= show_selected_airport(flight.departure_id) %></td>
@@ -17,10 +19,10 @@
           <td><%= short_date_format(flight)  %></td>
           <td><%= short_time_format(flight) %></td>
           <td><%= duration_formatted(flight) %></td>
-          <td>
-          </td>
+          <td><%= f.radio_button :flight_id, flight %></td>
         </tr>
       <% end %>
+      <%= f.submit "Book Flight", name: nil %>
     <% end %>
   </table>
 </div>

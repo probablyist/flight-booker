@@ -10,7 +10,7 @@
   <%= f.select(:departure_time, Flight.options_for_select, selected: params[:departure_time], prompt: "Date") %>
 
   <%= f.label "Number of Passengers" %>
-  <%# <%= f.select(:passenger_count, options_for_select([1, 2, 3, 4], params[:passenger_count]), require: true ) %>
+  <%= f.select(:passenger_count, options_for_select([1, 2, 3, 4], params[:passenger_count]), require: true ) %>
 
   <div>
     <%= f.submit "Find Flights", name: nil %>
