@@ -1,6 +1,7 @@
 module FlightsHelper
   def show_selected_airport(location_id)
-    Airport.find(location_id).city
+    airport = Airport.find(location_id)
+    "#{airport.city}, #{airport.state}"
   end
 
   def short_time_format(flight)

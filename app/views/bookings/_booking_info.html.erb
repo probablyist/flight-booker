@@ -1,0 +1,24 @@
+<div class="table_container">
+  <table>
+    <thead>
+      <tr>
+        <td>Flight Number</td>
+        <td>From</td>
+        <td>Airport Code</td>
+        <td>To</td>
+        <td>Airport Code</td>
+        <td>Departure Date</td>
+        <td>Departure Time</td>
+        <td>Flight Time</td>
+      </tr>
+    </thead>
+    <td><%= @flight.id %></td>
+    <td><%= show_selected_airport(@flight.departure_id) %></td>
+    <td><%= @flight.origin_airport.code %></td>
+    <td><%= show_selected_airport(@flight.arrival_id) %></td>
+    <td><%= @flight.destination_airport.code %></td>
+    <td><%= short_date_format(@flight) %></td>
+    <td><%= short_time_format(@flight) %></td>
+    <td><%= duration_formatted(@flight) %></td>
+  </table>
+</div>

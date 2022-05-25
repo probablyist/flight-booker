@@ -1,0 +1,16 @@
+<div class="table_container">
+  <table>
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Email</td>
+      </tr>
+    </thead>
+    <% @booking.passengers.each do |p| %>
+      <tr>
+        <td><%= p.name %></td>
+        <td><%= p.email %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
