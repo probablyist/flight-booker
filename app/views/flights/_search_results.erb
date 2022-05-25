@@ -19,7 +19,7 @@
           <td><%= short_date_format(flight)  %></td>
           <td><%= short_time_format(flight) %></td>
           <td><%= duration_formatted(flight) %></td>
-          <td><%= f.radio_button :flight_id, flight %></td>
+          <td><%= f.radio_button :flight_id, flight.id %></td>
         </tr>
       <% end %>
       <%= f.submit "Book Flight", name: nil %>
