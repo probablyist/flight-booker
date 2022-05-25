@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <%= form_with url: new_booking_path, method: "get", local: true do |f| %>
-      <%= hidden_field_tag :passenger_count, params[:passenger_count] %>
+      <%= f.hidden_field :passenger_count, value: params[:passenger_count] %>
       <% @flight_times.each do |flight| %>
         <tr class="search_results">
           <td><%= show_selected_airport(flight.departure_id) %></td>

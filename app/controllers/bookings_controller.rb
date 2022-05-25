@@ -9,9 +9,8 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     if @booking.save
-      send_confirmation_emails(@booking)
-      flash[:success] = "Successfully booked #{@booking.flight.airline} flight ##{@booking.flight.flight_number}!"
-      redirect_to booking_path
+      flash[:success] = "Successfully booked!"
+      redirect_to booking_path(@booking)
     else
       flash[:error] = @booking.errors.full_messages.to_sentence
       redirect_back(fallback_location: root_path)
