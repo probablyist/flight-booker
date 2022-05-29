@@ -1,28 +1,41 @@
-<div class="table_container">
-  <table class="available_flights">
-    <thead>
-      <tr class="table_header">
-        <td>Origin</td>
-        <td>Destination</td>
-        <td>Departure Date</td>
-        <td>Departure Time</td>
-        <td>Flight Duration</td>
-        <td>Select Flight</td>
+
+<table class="table">
+  <thead>
+    <tr>
+      <td>Origin</td>
+      <td>Destination</td>
+      <td>Departure Date</td>
+      <td>Departure Time</td>
+      <td>Flight Duration</td>
+      <td>Select Flight</td>
+    </tr>
+  </thead>
+  <%= form_with url: new_booking_path, method: "get", local: true do |f| %>
+    <%= f.hidden_field :passenger_count, value: params[:passenger_count] %>
+    <% @flight_times.each do |flight| %>
+      <tr class="search_results">
+        <td><%= show_selected_airport(flight.departure_id) %></td>
+        <td><%= show_selected_airport(flight.arrival_id) %></td>
+        <td><%= short_date_format(flight)  %></td>
+        <td><%= short_time_format(flight) %></td>
+        <td><%= duration_formatted(flight) %></td>
+        <td><%= f.radio_button :flight_id, flight.id %></td>
       </tr>
-    </thead>
-    <%= form_with url: new_booking_path, method: "get", local: true do |f| %>
-      <%= f.hidden_field :passenger_count, value: params[:passenger_count] %>
-      <% @flight_times.each do |flight| %>
-        <tr class="search_results">
-          <td><%= show_selected_airport(flight.departure_id) %></td>
-          <td><%= show_selected_airport(flight.arrival_id) %></td>
-          <td><%= short_date_format(flight)  %></td>
-          <td><%= short_time_format(flight) %></td>
-          <td><%= duration_formatted(flight) %></td>
-          <td><%= f.radio_button :flight_id, flight.id %></td>
-        </tr>
-      <% end %>
-      <%= f.submit "Book Flight", name: nil %>
     <% end %>
-  </table>
+</table>
+
+<div class="field">
+  <div class="field-label">
+    <%# Left empty for spacing %>
+  </div>
+  <div class="field-body">
+    <div class="field">
+      <div class="control">
+        <%= f.submit "Book Flight", class: "button is-info", name: nil %>
+      </div>
+    </div>
+  </div>
 </div>
+<% end %>
+
+
