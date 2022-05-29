@@ -1,8 +1,7 @@
-<div class="container">
-  <div class="columns">
-    <%= render "form" %>
-    <% unless @flight_times.empty? %>
+
+    <% if @flight_times.empty? %>
+      <%= render "form" %>
+    <% else %>
       <%= render "search_results" %>
     <% end %>
-  </div>
-</div>
+

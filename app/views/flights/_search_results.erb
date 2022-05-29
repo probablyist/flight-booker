@@ -1,41 +1,52 @@
-
-<table class="table">
-  <thead>
-    <tr>
-      <td>Origin</td>
-      <td>Destination</td>
-      <td>Departure Date</td>
-      <td>Departure Time</td>
-      <td>Flight Duration</td>
-      <td>Select Flight</td>
-    </tr>
-  </thead>
-  <%= form_with url: new_booking_path, method: "get", local: true do |f| %>
-    <%= f.hidden_field :passenger_count, value: params[:passenger_count] %>
-    <% @flight_times.each do |flight| %>
-      <tr class="search_results">
-        <td><%= show_selected_airport(flight.departure_id) %></td>
-        <td><%= show_selected_airport(flight.arrival_id) %></td>
-        <td><%= short_date_format(flight)  %></td>
-        <td><%= short_time_format(flight) %></td>
-        <td><%= duration_formatted(flight) %></td>
-        <td><%= f.radio_button :flight_id, flight.id %></td>
-      </tr>
-    <% end %>
-</table>
-
-<div class="field">
-  <div class="field-label">
-    <%# Left empty for spacing %>
+<section class="hero is-small">
+  <div class="hero-body">
+    <p class="title">
+      Select a flight
+    </p>
   </div>
-  <div class="field-body">
+</section>
+
+<div class="column is-half is-offset-one-quarter">
+  <div class="box">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Origin</th>
+          <th>Destination</th>
+          <th>Departure Date</th>
+          <th>Departure Time</th>
+          <th>Flight Duration</th>
+          <th>Select Flight</th>
+        </tr>
+      </thead>
+      <%= form_with url: new_booking_path, method: "get", local: true do |f| %>
+        <%= f.hidden_field :passenger_count, value: params[:passenger_count] %>
+        <% @flight_times.each do |flight| %>
+          <tr class="search_results">
+            <td><%= show_selected_airport(flight.departure_id) %></td>
+            <td><%= show_selected_airport(flight.arrival_id) %></td>
+            <td><%= short_date_format(flight)  %></td>
+            <td><%= short_time_format(flight) %></td>
+            <td><%= duration_formatted(flight) %></td>
+            <td><%= f.radio_button :flight_id, flight.id %></td>
+          </tr>
+        <% end %>
+    </table>
+
     <div class="field">
-      <div class="control">
-        <%= f.submit "Book Flight", class: "button is-info", name: nil %>
+      <div class="field-label">
+        <%# Left empty for spacing %>
+      </div>
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+            <%= f.submit "Book Flight", class: "button is-info", name: nil %>
+          </div>
+        </div>
       </div>
     </div>
+    <% end %>
   </div>
 </div>
-<% end %>
 
 

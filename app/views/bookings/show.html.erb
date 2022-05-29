@@ -1,7 +1,26 @@
-This is the Show booking page
+<div class="column">
+  <section class="hero is-small">
+    <div class="hero-body">
+      <p class="title">
+        Flight details
+      </p>
+    </div>
+  </section>
+  <%= render 'booking_info' %>
+</div>
 
-Booking Info:
-<%= render 'booking_info' %>
+<div class="column">
+  <section class="hero is-small">
+    <div class="hero-body">
+      <p class="title">
+        Passenger Details
+      </p>
+    </div>
+  </section>
+  <%= render 'passenger_info' %>
+</div>
 
-Passenger Info:
-<%= render 'passenger_info' %>
+<div class="has-text-centered">
+  <%= link_to "Book another flight", root_url, class: "button is-info" %>
+</div>
+

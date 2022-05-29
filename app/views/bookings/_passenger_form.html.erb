@@ -1,18 +1,51 @@
-<%= form_with model: @booking do |f| %>
-  <ol>
-    <%= f.fields_for :passengers do |passenger_info| %>
-      <li>
-        <%= passenger_info.label :name %>
-        <%= passenger_info.text_field :name %>
-      </li>
-      <li>
-        <%= passenger_info.label :email %>
-        <%= passenger_info.email_field :email %>
-      </li>
-    <% end %>
-  </ol>
+<section class="hero is-small">
+  <div class="hero-body">
+    <p class="title">
+      Enter your passenger info
+    </p>
+  </div>
+</section>
 
-  <%= f.hidden_field :flight_id, value: params[:flight_id] %>
-  <%= link_to "Cancle", root_url %>
-  <%= f.submit "Complete Booking", name: nil %>
-<% end %>
+<div class="column is-half is-offset-one-quarter">
+  <div class="box">
+    <%= form_with model: @booking do |f| %>
+      <%= f.fields_for :passengers do |passenger_info| %>
+        <div class="block">
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <%= passenger_info.label :name, class: "label" %>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <%= passenger_info.text_field :name, class: "input" %>
+                </div>
+              </div>
+            </div>
+            <div class="field-label is-normal">
+              <%= passenger_info.label :email, class: "label" %>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <%= passenger_info.email_field :email, class: "input" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+      <%= f.hidden_field :flight_id, value: params[:flight_id] %>
+      <div class="field is-grouped is-grouped-right">
+        <div class="control">
+          <%= f.submit "Complete Booking", name: nil, class: "button is-info" %>
+        </div>
+        <div class="control">
+          <%= link_to "Cancle", root_url, class: "button is-info is-light" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

@@ -1,77 +1,81 @@
-<div class="column is-narrow">
-  <%= form_with url: flights_path, method: :get do |f| %>
-
-    <div class="field is-horizontal">
-      <div class="field-label is-normal">
-        <div class="label"><%= f.label "Departure City" %></div>
+<section class="hero is-small">
+  <div class="hero-body">
+    <p class="title">
+      Search for available flights
+    </p>
+  </div>
+</section>
+<%= form_with url: flights_path, method: :get do |f| %>
+  <div class="column is-half is-offset-one-quarter">
+    <div class="box">
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <div class="label"><%= f.label "Departure City" %></div>
+        </div>
+        <div class="field-body">
+          <div class="field is-fullwidth">
+            <div class="control">
+              <div class="select is-fullwidth">
+                <%= f.select(:departure_id, Airport.options_for_select, selected: params[:departure_id], prompt: "From", require: true) %>
+                </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="field-body">
-        <div class="field is-narrow">
-          <div class="control">
-            <div class="select is-fullwidth">
-              <%= f.select(:departure_id, Airport.options_for_select, selected: params[:departure_id], prompt: "From", require: true) %>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <div class="label"><%= f.label "Destination City" %></div>
+        </div>
+        <div class="field-body">
+          <div class="field is-fullwidth">
+            <div class="control">
+              <div class="select is-fullwidth">
+                <%= f.select(:arrival_id, Airport.options_for_select, selected: params[:arrival_id], prompt: "To", require: true) %>
               </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="field is-horizontal">
-      <div class="field-label is-normal">
-        <div class="label"><%= f.label "Destination City" %></div>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <div class="label"><%= f.label "Departure Date" %></div>
+        </div>
+        <div class="field-body">
+          <div class="field is-fullwidth">
+            <div class="control">
+              <div class="select is-fullwidth">
+                <%= f.select(:departure_time, Flight.options_for_select, selected: params[:departure_time], prompt: "Date") %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="field-body">
-        <div class="field is-narrow">
-          <div class="control">
-            <div class="select is-fullwidth">
-              <%= f.select(:arrival_id, Airport.options_for_select, selected: params[:arrival_id], prompt: "To", require: true) %>
+      <div class="field is-horizontal">
+        <div class="field-label is-normal">
+          <div class="label"><%= f.label "Number of Passengers" %></div>
+        </div>
+        <div class="field-body">
+          <div class="field is-fullwidth">
+            <div class="control">
+              <div class="select is-fullwidth">
+                <%= f.select(:passenger_count, options_for_select([1, 2, 3, 4], params[:passenger_count]), require: true ) %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field is-horizontal">
+        <div class="field-label">
+          <%# Left empty for spacing %>
+        </div>
+        <div class="field-body">
+          <div class="field">
+            <div class="control">
+              <%= f.submit "Find Flights", class: "button is-info", name: nil %>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="field is-horizontal">
-      <div class="field-label is-normal">
-        <div class="label"><%= f.label "Departure Date" %></div>
-      </div>
-      <div class="field-body">
-        <div class="field is-narrow">
-          <div class="control">
-            <div class="select is-fullwidth">
-              <%= f.select(:departure_time, Flight.options_for_select, selected: params[:departure_time], prompt: "Date") %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="field is-horizontal">
-      <div class="field-label is-normal">
-        <div class="label"><%= f.label "Number of Passengers" %></div>
-      </div>
-      <div class="field-body">
-        <div class="field is-narrow">
-          <div class="control">
-            <div class="select is-fullwidth">
-              <%= f.select(:passenger_count, options_for_select([1, 2, 3, 4], params[:passenger_count]), require: true ) %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="field is-horizontal">
-      <div class="field-label">
-        <%# Left empty for spacing %>
-      </div>
-      <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <%= f.submit "Find Flights", class: "button is-info", name: nil %>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</div>
+  </div>
+<% end %>
