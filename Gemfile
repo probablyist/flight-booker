@@ -67,6 +67,9 @@ group :development do
 
   # Generate fake data
   # gem 'faker', '~> 2.20'
+
+  # Open preview of emails in browser instead of sending
+  gem 'letter_opener', '~> 1.8', '>= 1.8.1'
 end
 
 group :test do
