@@ -8,8 +8,9 @@ class FlightsController < ApplicationController
     return if flight_params.empty?
   end
 
-  # Lists all flights
-  def flights
+  private
+   # Lists all flights
+   def flights
     Flight.all.order(:departure_time)
   end
 
@@ -30,10 +31,6 @@ class FlightsController < ApplicationController
     DateTime.new(date.year, date.month, date.day).all_day
   end
 
-
-
-
-  private
     # Only allow a list of trusted parameters through.
     def flight_params
       params.permit(:departure_id, :arrival_id, :departure_time, :duration, :passenger_count)
