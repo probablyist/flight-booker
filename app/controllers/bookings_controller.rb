@@ -8,14 +8,19 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
+
     if @booking.save
       flash[:success] = "Successfully booked!"
+      if Rails.env.development?
+        @booking.passengers.each do |passenger|
+          PassengerMailer.confirmation_email(passenger).deliver_now
+        end
+      end
       redirect_to booking_path(@booking)
     else
       flash[:error] = @booking.errors.full_messages.to_sentence
       redirect_back(fallback_location: root_path)
     end
-
   end
 
   def show
@@ -26,6 +31,6 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:flight_id, :passenger_count, passengers_attributes: [:name, :email])
+    params.require(:booking).permit(:flight_id, :passenger_count, passengers_attributes: [:id, :name, :email])
   end
 end
